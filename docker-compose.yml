@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    env_file: ./.env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      #backup quando o volume for criado
+      - ./sql_inicial.sql:/docker-entrypoint-initdb.d/001.sql:ro
+
+  api:
+    build:
+      context: ./receitas-api
+    container_name: receitas_api
+    restart: always
+    env_file: ./.env
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: ${DATABASE_URL}  
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES: ${JWT_EXPIRES}
+      PORT: ${PORT}
+      COOKIE_DOMAIN: ${COOKIE_DOMAIN}
+    depends_on:
+      - mysql
+    ports:
+      - "3000:3000"
+
+  client:
+    build:
+      context: ./receitas-client
+      args:
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL}
+    container_name: receitas_client
+    restart: always
+    depends_on:
+      - api
+    ports:
+      - "8080:4173"
+
+volumes:
+  mysql_data:

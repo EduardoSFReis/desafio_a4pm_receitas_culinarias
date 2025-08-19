@@ -60,24 +60,33 @@ O client estará disponível em:
 - **Senha:** `a4pm`
 
 ## Env
-O caso usado em docker o env deve ser inserido na raiz do projeto, segue de exemplo
+O caso usado em docker o env deve ser inserido na raiz do projeto, segue de exemplo:
 ```sh
-#myql
+
+# mysql
 MYSQL_ROOT_PASSWORD=1234
 MYSQL_DATABASE=teste_receitas_rg_sistemas
+MYSQL_PORT=3307       
+MYSQL_HOST=mysql       
 
 # api
-DATABASE_URL=mysql://root:1234@mysql:3306/teste_receitas_rg_sistemas
-
 JWT_SECRET=segredo
 JWT_EXPIRES=1h
 PORT=3000
-NODE_ENV=production
+NODE_ENV=develepoment
 COOKIE_DOMAIN=localhost
 
-# front end
-VITE_API_BASE_URL="http://localhost:3000"
+DATABASE_URL=mysql://root:${MYSQL_ROOT_PASSWORD}@${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}
+
+# client
+VITE_API_BASE_URL=http://localhost:3000
+
+
 ```
+
+
+## Observação:
+Caso o ja tenha um mysql no computador pode alterar a porta via env para subir o docker ou fazer o backup no propio mysql e subir apenas os servicos
 
 
 

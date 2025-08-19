@@ -1,2 +1,4 @@
 /receitas-client/node_modules
 .env
+/receitas-client/dist
+/receitas-api/dist

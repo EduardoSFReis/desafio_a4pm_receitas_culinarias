@@ -1,10 +1,5 @@
 # Desafio Técnico - Sistema de Receitas
 
-Este projeto foi desenvolvido como parte do **teste técnico para Desenvolvedor / Tech Lead**, com o objetivo de implementar o máximo de funcionalidades solicitadas dentro do prazo estabelecido pela empresa.
-
-## Objetivo do Desafio
-O sistema consiste em um **gerenciador de receitas culinárias**, permitindo cadastro de usuários, autenticação e manipulação de receitas. Foram atendidos os requisitos de **backend, frontend e banco de dados**, conforme especificado.
-
 ##  Funcionalidades Implementadas
 - Cadastro de usuário no sistema  
 - Login de usuário  

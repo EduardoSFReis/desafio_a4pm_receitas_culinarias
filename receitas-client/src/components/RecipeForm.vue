@@ -46,7 +46,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
 import type { Category, RecipeDetails } from '../types'
-import { getCategories } from '../services/api'
+import { useCategoryStore } from '../stores/categories'
 
 const props = defineProps<{
   modelValue: Partial<RecipeDetails>
@@ -61,7 +61,7 @@ const submitting = ref(false)
 const categories = ref<Category[]>([])
 
 onMounted(async () => {
-  categories.value = await getCategories()
+  categories.value = await useCategoryStore().fetchAll()
 })
 
 async function submit() {
